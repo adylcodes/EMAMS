@@ -51,3 +51,10 @@
     background: #0c0c0c;
     padding: 10px 0px;
 }
+.card-primary:not(.card-outline)>.card-header {
+    background-color: #7571f9 !important;
+}
+.btn-primary {
+    background-color: #7571f9;
+    border-color: #7672fd;
+}

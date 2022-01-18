@@ -39,6 +39,12 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware(['auth','
     Route::get('/employees/profile/{employee_id}', 'EmployeeController@employeeProfile')->name('employees.profile');
     Route::delete('/employees/{employee_id}', 'EmployeeController@destroy')->name('employees.delete');
 
+    //Routes for Tasks
+    Route::get('/tasks/list', 'TaskController@index')->name('task.index');
+    Route::get('/task/add', 'TaskController@create')->name('task.create');
+    Route::post('/task', 'TaskController@store')->name('task.store');
+    Route::get('/task/view/{task_id}', 'TaskController@viewTask')->name('task.view');
+    Route::delete('/task/{task_id}', 'TaskController@destroy')->name('task.delete');
     // Routes for employees monitoring//
     Route::get('/employees/monitoring', 'EmployeeController@monitoring')->name('monitoring.index');
 

@@ -1,10 +1,9 @@
 <li class="nav-item has-treeview">
     <a href="#" class="nav-link">
-        <i class="nav-icon fa fa-calendar-check-o"></i>
+        <i class="nav-icon fa fa-user"></i>
         <p>
             Employees
             <i class="fas fa-angle-left right"></i>
-            <span class="badge badge-info right">3</span>
         </p>
     </a>
     <ul class="nav nav-treeview">
@@ -37,13 +36,45 @@
         </li>
     </ul>
 </li>
+
+<li class="nav-item has-treeview">
+    <a href="#" class="nav-link">
+        <i class="nav-icon fa fa-calendar-check-o"></i>
+        <p>
+            Tasks
+            <i class="fas fa-angle-left right"></i>
+        </p>
+    </a>
+    <ul class="nav nav-treeview">
+        <li class="nav-item">
+            <a
+                href="{{ route('admin.task.create') }}"
+                class="nav-link"
+            >
+                <i class="far fa-circle nav-icon"></i>
+                <p>Add Task</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a
+                href="{{ route('admin.task.index') }}"
+                class="nav-link"
+            >
+                <i class="far fa-circle nav-icon"></i>
+                <p>List Tasks</p>
+            </a>
+        </li>
+    </ul>
+</li>
+
+
 <li class="nav-item has-treeview">
     <a href="#" class="nav-link">
         <i class="nav-icon fa fa-unlock-alt"></i>
         <p>
             Authorization
             <i class="fas fa-angle-left right"></i>
-            <span class="badge badge-info right">2</span>
+{{--            <span class="badge badge-info right">2</span>--}}
         </p>
     </a>
     <ul class="nav nav-treeview">
@@ -103,8 +134,6 @@
         <i class="nav-icon fa fa-archive"></i>
         <p>
             Activity Monitoring
-            <i class="fas fa-angle-left right"></i>
-            <span class="badge badge-info right">2</span>
         </p>
     </a>
 </li>
