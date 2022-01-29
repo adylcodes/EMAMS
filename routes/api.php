@@ -22,3 +22,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // save screen shot API
 Route::post('/store/screen', 'Employee\EmployeeController@saveImage')->name('employees.store.screen');
 
+Route::post('/change-assignee', 'Employee\TaskController@changeAssignee')->name('employees.change.assignee');
+
+Route::post('/change-status', 'Employee\TaskController@changeStatus')->name('employees.change.status');
+

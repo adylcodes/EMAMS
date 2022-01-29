@@ -84,6 +84,11 @@ Route::namespace('Employee')->prefix('employee')->name('employee.')->middleware(
     Route::post('/attendance/{employee_id}', 'AttendanceController@store')->name('attendance.store');
     Route::put('/attendance/{attendance_id}', 'AttendanceController@update')->name('attendance.update');
     // Routes for Attendances //
+
+
+    //Employee Tasks
+    Route::get('/tasks/list', 'TaskController@index')->name('task.index');
+    Route::get('/task/view/{task_id}', 'TaskController@viewTask')->name('task.view');
     /*
     *
     */

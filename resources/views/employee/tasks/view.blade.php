@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
 
+</style>
 <!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="container-fluid">
@@ -29,9 +31,11 @@
 <!-- /.content-header -->
 
 <!-- Main content -->
+
 <section class="content">
     <div class="container">
         <div class="row">
+
             <div class="col-md-6 mx-auto">
                 <div class="card card-primary">
                     <div class="card-header">
@@ -39,7 +43,7 @@
                     </div>
                     <div class="card-body">
                         @include('messages.alerts')
-
+                        <div align="center"><p id="message"></p></div>
                         <table class="table profile-table table-hover">
                             <tr>
                                 <td>Title</td>
@@ -55,11 +59,25 @@
                             </tr>
                             <tr>
                                 <td>Status</td>
-                                <td>{{ $task->status }}</td>
+                                <td>
+                                    <select id="status" name="status">
+                                        <option  @if( $task->status =='To do') selected @endif value="To do">To do</option>
+                                        <option  @if( $task->status =='In progress') selected @endif value="In progress">Work In progress</option>
+                                        <option  @if( $task->status =='Ready to QA') selected @endif value="Ready to QA">Ready to QA</option>
+                                        <option  @if( $task->status =='QA in progress') selected @endif value="QA in progress">QA in progress</option>
+                                        <option  @if( $task->status =='Completed') selected @endif value="Completed">Completed</option>
+                                    </select>
+                                    </td>
                             </tr>
                             <tr>
                                 <td>Assigned to</td>
-                                <td>{{ $task->employee->first_name.' '.$task->employee->last_name }}</td>
+                                <td>
+                                    <select id="assignee" name="assignee">
+                                        @foreach($task->employeeList as $row)
+                                        <option  @if($task->employee->id==$row->id) selected @endif value="{{$row->id}}">{{ $row->first_name.' '.$row->last_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
                             </tr>
                         </table>
                     </div>
@@ -76,5 +94,65 @@
 <!-- /.content -->
 
 <!-- /.content-wrapper -->
+
+    <script>
+        $("#assignee").on('change',function (){
+           var val=$('#assignee').val();
+           var task={{$task->id}}
+            $.ajax({
+                type: "POST",
+                url: "{{route('employees.change.assignee')}}",
+                data: {
+                    task: task,
+                    assignee:val
+                }
+            }).done(function(o) {
+                console.log(o.response);
+                if(o.response==true){
+                    document.getElementById("message").innerHTML = "Assignee Changed Successfully.";
+                    document.getElementById("message").style.color='green';
+                    setTimeout(function() {
+                        $('#message').html('');
+                    }, 3000);
+                }else{
+                    document.getElementById("message").innerHTML = "Failed to change assignee.";
+                    document.getElementById("message").style.color='red';
+                    setTimeout(function() {
+                        $('#message').html('');
+                    }, 3000);
+                }
+
+            });
+        });
+
+        $("#status").on('change',function (){
+            var val=$('#status').val();
+            var task={{$task->id}}
+            $.ajax({
+                type: "POST",
+                url: "{{route('employees.change.status')}}",
+                data: {
+                    task: task,
+                    status:val
+                }
+            }).done(function(o) {
+                console.log(o.response);
+                if(o.response==true){
+                    document.getElementById("message").innerHTML = "Status Changed Successfully.";
+                    document.getElementById("message").style.color='green';
+                    setTimeout(function() {
+                        $('#message').html('');
+                    }, 3000);
+                }else{
+                    document.getElementById("message").innerHTML = "Failed to change status.";
+                    document.getElementById("message").style.color='red';
+                    setTimeout(function() {
+                        $('#message').html('');
+                    }, 3000);
+                }
+
+            });
+        });
+    </script>
 
 @endsection
