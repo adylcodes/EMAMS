@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Attendance;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -34,6 +35,12 @@ class LoginController extends Controller
         if ($user->hasRole('admin')) {
             return '/admin';
         }
+        $attendance = new Attendance([
+            'employee_id' =>  $employee = Auth::user()->employee->id,
+            'entry_ip' => '284.3474.344',
+            'entry_location' => 'Islamabad'
+        ]);
+        $attendance->save();
         return '/employee';
     }
     /**

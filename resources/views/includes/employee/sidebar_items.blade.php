@@ -8,15 +8,15 @@
         </p>
     </a>
     <ul class="nav nav-treeview">
-        <li class="nav-item">
-            <a
-                href="{{ route('employee.attendance.create') }}"
-                class="nav-link"
-            >
-                <i class="far fa-circle nav-icon"></i>
-                <p>Attendance for Today</p>
-            </a>
-        </li>
+{{--        <li class="nav-item">--}}
+{{--            <a--}}
+{{--                href="{{ route('employee.attendance.create') }}"--}}
+{{--                class="nav-link"--}}
+{{--            >--}}
+{{--                <i class="far fa-circle nav-icon"></i>--}}
+{{--                <p>Attendance for Today</p>--}}
+{{--            </a>--}}
+{{--        </li>--}}
         <li class="nav-item">
             <a
                 href="{{ route('employee.attendance.index') }}"
