@@ -1,4 +1,4 @@
-@extends('layouts.app')        
+@extends('layouts.app')
 
 @section('content')
 
@@ -42,7 +42,7 @@
                         @csrf
                         @method('POST')
                     <div class="card-body">
-                        
+
                             <fieldset>
                                 <div class="form-group">
                                     <label for="">First Name</label>
@@ -129,7 +129,7 @@
                                                 <option value="{{ $department->id }}"
                                                     @if (old('department_id') == $department->id)
                                                         selected
-                                                    @endif    
+                                                    @endif
                                                 >
                                                     {{ $department->name }}
                                                 </option>
@@ -179,8 +179,8 @@
                                     @enderror
                                 </div>
                             </fieldset>
-                            
-                        
+
+
                     </div>
                     <div class="card-footer text-center">
                         <button type="submit" class="btn btn-flat btn-primary" style="width: 40%; font-size:1.3rem">Add</button>
@@ -189,7 +189,7 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
     <!-- /.container-fluid -->
 </section>
@@ -202,6 +202,15 @@
 @section('extra-js')
 <script>
     $().ready(function() {
+        var date = new Date();
+        var day=date.getDate();
+        if(day<10){
+            day='0'+date.getDate();
+        }
+        var month=date.getMonth()+1;
+        if(month<10){
+            month='0'+month;
+        }
         if('{{ old('dob') }}') {
             const dob = moment('{{ old('dob') }}', 'DD-MM-YYYY');
             const join_date = moment('{{ old('join_date') }}', 'DD-MM-YYYY');
@@ -210,6 +219,7 @@
                 "startDate": dob,
                 "singleDatePicker": true,
                 "showDropdowns": true,
+                "maxDate": day+ '-' + month + '-' + (date.getFullYear()),
                 "locale": {
                     "format": "DD-MM-YYYY"
                 }
@@ -217,28 +227,47 @@
             $('#join_date').daterangepicker({
                 "startDate": join_date,
                 "singleDatePicker": true,
+                "maxDate": day+ '-' + month + '-' + (date.getFullYear()),
                 "showDropdowns": true,
                 "locale": {
                     "format": "DD-MM-YYYY"
                 }
             });
         } else {
+
+            date.setFullYear( date.getFullYear() - 18);
+
+            var day=date.getDate();
+            if(day<10){
+                day='0'+date.getDate();
+            }
+            var month=date.getMonth()+1;
+            if(month<10){
+                month='0'+month;
+            }
+            console.log(day+ '-' + month + '-' + (date.getFullYear()));
             $('#dob').daterangepicker({
                 "singleDatePicker": true,
                 "showDropdowns": true,
+                "startDate":day+ '-' + month + '-' + (date.getFullYear()),
+                "maxDate": day+ '-' + month + '-' + (date.getFullYear()),
+                "maxYear":date.getFullYear(),
                 "locale": {
                     "format": "DD-MM-YYYY"
                 }
             });
+            var date = new Date();
+            console.log(date.getMonth());
             $('#join_date').daterangepicker({
                 "singleDatePicker": true,
+                "maxDate":day+ '-' + month + '-' + (date.getFullYear()),
                 "showDropdowns": true,
                 "locale": {
                     "format": "DD-MM-YYYY"
                 }
             });
         }
-        
+
     });
 </script>
 @endsection
