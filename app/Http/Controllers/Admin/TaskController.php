@@ -53,7 +53,8 @@ class TaskController extends Controller
             'subject'=>'Task assigned to you by '.Auth::user()->name,
             'body'=>url('/employee/task/view/'.$task),
             'notification_to'=>$request->assignee,
-            'notification_by'=>Auth::id()
+            'notification_by'=>Auth::id(),
+            'is_readed'=>false
         ]);
 
         $request->session()->flash('success', 'Task has been successfully added');

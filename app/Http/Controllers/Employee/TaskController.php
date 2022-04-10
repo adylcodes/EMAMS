@@ -48,13 +48,15 @@ class TaskController extends Controller
                 'subject'=>'Assignee changed on your task by '.$user->name,
                 'body'=>url('/admin/task/view/'.$task->id),
                 'notification_to'=>$task->created_by,
-                'notification_by'=>$user->id
+                'notification_by'=>$user->id,
+                'is_readed'=>false
             ]);
             Notification::create([
                 'subject'=>'Task assigned to you by '.$user->name,
                 'body'=>url('/employee/task/view/'.$task->id),
                 'notification_to'=>$task->assignee,
-                'notification_by'=>$user->id
+                'notification_by'=>$user->id,
+                'is_readed'=>false
             ]);
 
             $response=true;
@@ -83,6 +85,7 @@ class TaskController extends Controller
             $notification->body=url('/admin/task/view/'.$task->id);
             $notification->notification_to=$task->created_by;
             $notification->notification_by=$user->id;
+            $notification->is_readed=false;
             $notification->save();
             $response=true;
         }
