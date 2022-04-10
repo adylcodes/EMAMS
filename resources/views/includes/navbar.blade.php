@@ -4,8 +4,24 @@
         padding: 10px;
         border-bottom: 1px solid #d2d2d2;
     }
+    .active_notify{
+        background: #d6e7fc;
+        color: white;
+    }
     .not-p{
         font-size: 12px;
+    }
+    #count{
+        background-color: blue;
+        color: white;
+        padding: 5px;
+        border-radius: 50%;
+        /* width: 24px; */
+        position: absolute;
+        /* height: 10px; */
+        left: -2px;
+        top: -1px;
+        font-size: 8px;
     }
 </style>
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -24,9 +40,10 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
 
-        <li class="nav-item dropdown user user-menu">
+        <li class="nav-item dropdown user user-menu" id="notification">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                 <span class="hidden-xs"><i class="fa fa-bell-o" style="color: #7571f9"></i> Notifications</span>
+                <span id="count"></span>
             </a>
             <ul id="notify" class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="min-height: 100px">
 
@@ -97,21 +114,49 @@
 
 <script>
 
-
+    $("#notification").on('click',function (){
         $.ajax({
             type: "GET",
-            url: "{{route('notifications',['id' => Auth::id()])}}",
+            url: "{{route('notifications.read',['id' => Auth::id()])}}",
         }).done(function(o) {
             console.log(o.response);
-            var body="";
-            if(o.response){
-                $.each(o.response, function( index, value ) {
-                    body+="<li class='notifyLi'><a href='"+value.body+"'><p class='not-p'><i class='fa fa-bell-o'></i> "+value.subject+"</p></a></li>";
-                });
-                $("#notify").html(body);
-            }else{
-
-            }
-
         });
+    });
+
+    var count=0;
+      function notifications(){
+          $.ajax({
+              type: "GET",
+              url: "{{route('notifications',['id' => Auth::id()])}}",
+          }).done(function(o) {
+              console.log(o.response);
+              var body="";
+              if(o.response){
+                  count=0;
+                  $.each(o.response, function( index, value ) {
+                      if(value.is_readed){
+                          var active="";
+                      }else{
+                          var active="active_notify";
+                          count++;
+                      }
+                      body+="<li class='notifyLi "+active+"'><a href='"+value.body+"'><p class='not-p'><i class='fa fa-bell-o'></i> "+value.subject+"</p></a></li>";
+                  });
+                  $("#notify").html(body);
+                  if(count){
+                      $("#count").html(count);
+                      $("#count").css('display','block');
+                  }else {
+                      $("#count").css('display','none');
+                  }
+              }else{
+
+              }
+
+          });
+      }
+    notifications();
+    setInterval(function(){
+        notifications();
+    }, 10000);
 </script>

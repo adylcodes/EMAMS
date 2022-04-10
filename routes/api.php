@@ -26,4 +26,7 @@ Route::post('/change-assignee', 'Employee\TaskController@changeAssignee')->name(
 
 Route::post('/change-status', 'Employee\TaskController@changeStatus')->name('employees.change.status');
 Route::get('/notifications/{id}', 'Auth\RegisterController@notifications')->name('notifications');
+Route::get('/notifications/read/{id}', 'Auth\RegisterController@notificationsRead')->name('notifications.read');
+
+
 

@@ -36,6 +36,17 @@ class RegisterController extends Controller
         ]);
     }
 
+    public function notificationsRead(Request $request,$id){
+        $notifications=Notification::where('notification_to',$id)->get();
+        foreach ($notifications as $notification){
+            $notification->is_readed=true;
+            $notification->save();
+        }
+        return response()->json([
+            'response' => $notifications
+        ]);
+    }
+
     /**
      * Where to redirect users after registration.
      *
