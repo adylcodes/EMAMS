@@ -104,7 +104,8 @@
                 url: "{{route('employees.change.assignee')}}",
                 data: {
                     task: task,
-                    assignee:val
+                    assignee:val,
+                    user:{{$task->logged_in_user}}
                 }
             }).done(function(o) {
                 console.log(o.response);
@@ -133,7 +134,8 @@
                 url: "{{route('employees.change.status')}}",
                 data: {
                     task: task,
-                    status:val
+                    status:val,
+                    user:{{$task->logged_in_user}}
                 }
             }).done(function(o) {
                 console.log(o.response);

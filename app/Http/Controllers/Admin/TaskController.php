@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Employee;
+use App\Notification;
 use App\Role;
 use App\Task;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -37,13 +39,21 @@ class TaskController extends Controller
             'assignee' => 'required',
             'deadline' => 'required',
         ]);
-        Task::create([
+        $task=Task::create([
             'title' => $request->title,
             'description' => $request->description,
             'assignee' => $request->assignee,
             'status' => 'To do',
             'deadline' => Carbon::parse($request->deadline)->format('Y-m-d H:i:s'),
             'is_active' => true,
+            'created_by'=>Auth::id()
+        ])->id;
+
+        Notification::create([
+            'subject'=>'Task assigned to you by '.Auth::user()->name,
+            'body'=>url('/employee/task/view/'.$task),
+            'notification_to'=>$request->assignee,
+            'notification_by'=>Auth::id()
         ]);
 
         $request->session()->flash('success', 'Task has been successfully added');

@@ -132,9 +132,10 @@
                 }
             });
         } else {
+            console.log('{{ date("d-m-Y") }}');
             $('#dob').daterangepicker({
-                "startDate":moment('{{ date('now') }}', 'DD-MM-YYYY'),
-                "minDate":moment('{{ date('now') }}', 'DD-MM-YYYY'),
+                "startDate":moment('{{ date("d-m-Y") }}', 'DD-MM-YYYY'),
+                "minDate":moment('{{ date("d-m-Y") }}', 'DD-MM-YYYY'),
                 "singleDatePicker": true,
                 "showDropdowns": true,
                 "locale": {

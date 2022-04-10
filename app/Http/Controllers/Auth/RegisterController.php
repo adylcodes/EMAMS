@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Notification;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -23,6 +26,15 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
+
+
+
+    public function notifications(Request $request,$id){
+        $notifications=Notification::where('notification_to',$id)->orderBy('id')->skip(0)->take(20)->get();
+        return response()->json([
+            'response' => $notifications
+        ]);
+    }
 
     /**
      * Where to redirect users after registration.

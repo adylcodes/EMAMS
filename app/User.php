@@ -43,6 +43,14 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Role');
     }
 
+    public function NotificationsTo() {
+        return $this->belongsToMany('App\Notification');
+    }
+
+    public function NotificationsBy() {
+        return $this->belongsToMany('App\Notification');
+    }
+
     public function tasks() {
         return $this->hasMany(Task::class,'assignee');
     }

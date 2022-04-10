@@ -25,4 +25,5 @@ Route::post('/store/screen', 'Employee\EmployeeController@saveImage')->name('emp
 Route::post('/change-assignee', 'Employee\TaskController@changeAssignee')->name('employees.change.assignee');
 
 Route::post('/change-status', 'Employee\TaskController@changeStatus')->name('employees.change.status');
+Route::get('/notifications/{id}', 'Auth\RegisterController@notifications')->name('notifications');
 
