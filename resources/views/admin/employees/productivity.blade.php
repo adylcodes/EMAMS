@@ -69,12 +69,19 @@
         flex-shrink: 0;
     }
 
+    #pdf{
+        padding: 10px;
+        background: darkgrey;
+        border-radius: 20px;
+    }
+
 </style>
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Productivity</h1>
+                <h1 class="m-0 text-dark">Productivity      <a id="pdf" href="{{route('admin.employees.gen.pdf',['employee_id'=>$employee->id])}}"> Download PDF Report</a>
+                </h1>
             </div>
             <!-- /.col -->
             <div class="col-sm-6">
@@ -83,8 +90,7 @@
                         <a href="{{ route('admin.index') }}">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item active">
-                        Productivity <a href="{{route('admin.employees.gen.pdf',['employee_id'=>$employee->id])}}"> Print</a>
-                    </li>
+                        Productivity   </li>
                 </ol>
             </div>
             <!-- /.col -->
@@ -151,27 +157,6 @@
 
 
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 mx-auto">
-                <div class="card card-primary">
-                    <div class="card-header">
-                        <h5 class="text-center mt-2">Productivity</h5>
-                    </div>
-                    <div class="card-body">
-                        @include('messages.alerts')
-                        <div class="row mb-3">
-                            <div class="col text-center mx-auto">
-                                <img src="/storage/employee_photos/{{ $employee->photo }}" class="rounded-circle img-fluid" alt=""
-                                style="box-shadow: 2px 4px rgba(0,0,0,0.1)"
-                                >
-                            </div>
-                        </div>
-
-                    </div>
-
                 </div>
             </div>
         </div>
