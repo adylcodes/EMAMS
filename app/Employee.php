@@ -21,6 +21,10 @@ class Employee extends Model
         return $this->hasMany('App\Attendance');
     }
 
+    public function tasks() {
+        return $this->hasMany('App\Task','assignee','id');
+    }
+
     public function monitoring() {
         return $this->hasMany('App\Monitoring');
     }

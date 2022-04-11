@@ -37,6 +37,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware(['auth','
     Route::post('/employees/attendance', 'EmployeeController@attendance')->name('employees.attendance');
     Route::delete('/employees/attendance/{attendance_id}', 'EmployeeController@attendanceDelete')->name('employees.attendance.delete');
     Route::get('/employees/profile/{employee_id}', 'EmployeeController@employeeProfile')->name('employees.profile');
+    Route::get('/employees/productivity/{employee_id}', 'EmployeeController@employeeProductivity')->name('employees.productivity');
+    Route::get('/get/pdf/{employee_id}','EmployeeController@pdfcreate')->name('employees.gen.pdf');
     Route::delete('/employees/{employee_id}', 'EmployeeController@destroy')->name('employees.delete');
 
     //Routes for Tasks

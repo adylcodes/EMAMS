@@ -1,7 +1,7 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4" style = "z-index: 1040 !important;">
     <!-- Brand Logo -->
-    <a 
+    <a
     @can('admin-access')
         href="{{ route('admin.index') }}"
     @endcan
@@ -36,7 +36,7 @@
                     alt="User Image"
                 />
                 @endif
-                
+
             </div>
             <div class="info">
                 <a href="#" class="d-block">{{ Auth::user()->name }}</a>
@@ -54,11 +54,16 @@
                 @can('admin-access')
 
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a @can('admin-access')
+                       href="{{ route('admin.index') }}"
+                       @endcan
+                       @can('employee-access')
+                       href="{{ route('employee.index') }}"
+                       @endcan class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                                 Admin Dashboard
-                            
+
                         </p>
                     </a>
                 </li>
@@ -70,7 +75,7 @@
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                                 Employee Dashboard
-                            
+
                         </p>
                     </a>
                 </li>

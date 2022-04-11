@@ -1,4 +1,4 @@
-@extends('layouts.app')        
+@extends('layouts.app')
 
 @section('content')
     <!-- Content Header (Page header) -->
@@ -38,7 +38,7 @@
                         <div class="card-title text-center">
                             Employees
                         </div>
-                        
+
                     </div>
                     <div class="card-body">
                         @if ($employees->count())
@@ -65,9 +65,10 @@
                                     <td>{{ $employee->salary }}</td>
                                     <td>
                                         <a href="{{ route('admin.employees.profile', $employee->id) }}" class="btn btn-flat btn-info">View Profile</a>
-                                        <button 
+                                        <a href="{{ route('admin.employees.productivity', $employee->id) }}" class="btn btn-flat btn-warning">View Productivity</a>
+                                        <button
                                         class="btn btn-flat btn-danger"
-                                        data-toggle="modal" 
+                                        data-toggle="modal"
                                         data-target="#deleteModalCenter{{ $index + 1 }}"
                                         >Delete Employee</button>
                                     </td>
@@ -85,10 +86,10 @@
                                                     <h5 style="text-align: center !important">Are you sure want to delete?</h5>
                                                 </div>
                                                 <div class="card-body text-center d-flex" style="justify-content: center">
-                                                    
+
                                                     <button type="button" class="btn flat btn-secondary" data-dismiss="modal">No</button>
-                                                    
-                                                    <form 
+
+                                                    <form
                                                     action="{{ route('admin.employees.delete', $employees->get($i-1)->id) }}"
                                                     method="POST"
                                                     >
@@ -111,11 +112,11 @@
                             <h4>No Records Available</h4>
                         </div>
                         @endif
-                        
+
                     </div>
                 </div>
                 <!-- general form elements -->
-                
+
             </div>
         </div>
     </div>
